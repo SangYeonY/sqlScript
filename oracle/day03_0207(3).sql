@@ -121,3 +121,26 @@ VALUES(tbl_buy_seq.nextval,'twice', 'DOWON123a', 2, sysdate);
 INSERT INTO IDEV.TBL_BUY#
 (buy_seq,CUSTOM_ID, PCODE, QUANTITY, BUY_DATE)
 VALUES(tbl_buy_seq.nextval,'mina012', 'd_14', 1, sysdate);
+
+
+
+--1. custom# 테이블에서 age 가 30세 이상 모든 내용 조회
+SELECT * FROM "TBL_CUSTOM#" tc WHERE age >= '30';
+
+--2. custom# 테이블에서 custom_id 'twice' 의 email 조회
+SELECT EMAIL  FROM "TBL_CUSTOM#" tc  WHERE CUSTOM_ID  = 'twice';
+--3. product# 테이블에서 category 'A2' 의 pname 조회
+SELECT PNAME  FROM "TBL_PRODUCT#" tp WHERE CATEGORY  = 'A2';
+--4. product# 테이블에서 price 의 최고값 조회
+SELECT MAX(price) FROM "TBL_PRODUCT#" tp ; 
+--5. buy# 테이블에서 'IPAD011' 총구매 수량 조회
+SELECT sum(QUANTITY) FROM "TBL_BUY#" tb WHERE PCODE = 'IPAD011';
+--6. buy# 테이블에서 custom_id 'nayeon' 의 모든 내용 조회
+SELECT * FROM "TBL_BUY#" tb2 WHERE CUSTOM_ID  ='mina012';
+--7. buy# 테이블에서 pcode 가 '1'이 포함된 것 조회
+SELECT * FROM "TBL_BUY#" tb WHERE PCODE = '1'; -- 완전일치 조회
+SELECT * FROM "TBL_BUY#" tb WHERE PCODE LIKE '%1%';-- 부분일치 조회.1을 포함
+SELECT * FROM "TBL_BUY#" tb WHERE PCODE LIKE '1%'; 	-- 부분일치 조회.1로 시작
+SELECT * FROM "TBL_BUY#" tb WHERE PCODE LIKE '%1'; 	-- 부분일치 조회.1로 끝나는
+--8. buy# 테이블에서 pcode 에 'on'을 포함하는 것 조회(대소문자 구분없는 조회)
+SELECT * FROM "TBL_BUY#" tb WHERE LOWER() (PCODE) LIKE '%on%'; 
