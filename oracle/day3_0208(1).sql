@@ -95,9 +95,12 @@ ALTER TABLE IDEV."TBL_BUY#"
 
 		-- JOIN을 쓰는 명령문 형식2(표준)
 		SELECT * FROM "TBL_PRODUCT#" tp 
-				LEFT OUTER JOIN "TBL_BUY#" tb 
+				LEFT OUTER JOIN "TBL_BUY#" tb -- 기준이 되는 테이블은 왼쪽 product#
 				ON tp.PCODE = tb.PCODE ;
 		
+		SELECT * FROM "TBL_BUY#" tb 
+		RIGHT OUTER JOIN "TBL_PRODUCT#" tp 	-- 기준이 되는 테이블은 오른쪽 product#
+		ON tp.PCODE = tb.PCODE ;
 		
 		
 		
