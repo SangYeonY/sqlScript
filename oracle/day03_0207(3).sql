@@ -136,7 +136,7 @@ SELECT MAX(price) FROM "TBL_PRODUCT#" tp ;
 --5. buy# 테이블에서 'IPAD011' 총구매 수량 조회
 SELECT sum(QUANTITY) FROM "TBL_BUY#" tb WHERE PCODE = 'IPAD011';
 --6. buy# 테이블에서 custom_id 'nayeon' 의 모든 내용 조회
-SELECT * FROM "TBL_BUY#" tb2 WHERE CUSTOM_ID  ='mina012';
+SELECT * FROM "TBL_BUY#" tb2 WHERE CUSTOM_ID  ='nayeon';
 --7. buy# 테이블에서 pcode 가 '1'이 포함된 것 조회
 SELECT * FROM "TBL_BUY#" tb WHERE PCODE = '1'; -- 완전일치 조회
 SELECT * FROM "TBL_BUY#" tb WHERE PCODE LIKE '%1%';-- 부분일치 조회.1을 포함
