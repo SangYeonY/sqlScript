@@ -23,7 +23,7 @@ CREATE TABLE money_tbl_02(
 	memsalse char(20),
 	PRIMARY KEY (custno,salenol)
 	);
-DROP SEQUENCE member_seq ;
+
 CREATE SEQUENCE member_seq INCREMENT BY 1
 START WITH 100001;
 
@@ -94,6 +94,8 @@ INSERT INTO IDEV.MONEY_TBL_02
 (CUSTNO, SALENOL, PCOST, AMOUNT, PRICE, PCODE, SDATE)
 VALUES(100004, 20160010 , 3000, 1, 3000, 'A007', '20160106');
 
+
+
 SELECT * FROM MEMBER_TBL_02;
 SELECT * FROM MONEY_TBL_02;
 
@@ -122,3 +124,34 @@ SELECT mt.CUSTNO, CUSTNAME, DECODE(grade ,'A','VIP','B','일반','C','직원') A
 	GROUP BY CUSTNO
 	ORDER BY asum DESC) sale
 	WHERE mt.CUSTNO = sale.custno; 
+
+-- 문제 변형 : "매출이 없는 회원은 조회되지 않는다." 를 "매출이 없는 회원은 0으로 출력한다."
+		-- 1) null 값을 -으로 출력하는 함수 : nvl 
+		-- 2) 외부조인으로 수정합니다.
+		-- 3) 매출합계가 같을 때는 회원번호 순서(오름차순)대로 출력합니다.	(참고:역순은 내림차순)
+SELECT mt.CUSTNO, CUSTNAME, DECODE(grade ,'A','VIP','B','일반','C','직원') AS agrade,
+	nvl(ASUM,0) AS sum_ FROM MEMBER_TBL_02 mt ,		-- 1)번 해결
+	(SELECT CUSTNO, sum(price) AS asum FROM MONEY_TBL_02 mt 
+	GROUP BY CUSTNO
+	) sale
+	WHERE mt.CUSTNO = sale.custno(+)		-- 2)번 해결
+	ORDER BY sum_ DESC,custno;				-- 3)번 해결 asum 이 같을 때는 custno 순서로 합니다.
+	
+	
+	-- 위의 5)번 select 실행 결과를 가상테이블 view 로 생성합니다.
+	CREATE VIEW v_by_custno
+	AS
+	SELECT mt.CUSTNO, CUSTNAME, DECODE(grade ,'A','VIP','B','일반','C','직원') AS agrade,
+	ASUM FROM MEMBER_TBL_02 mt ,
+	(SELECT CUSTNO, sum(price) AS asum FROM MONEY_TBL_02 mt 
+	GROUP BY CUSTNO
+	ORDER BY asum DESC) sale
+	WHERE mt.CUSTNO = sale.custno; 
+	
+
+SELECT * FROM V_BY_CUSTNO vbc ;
+SELECT * FROM V_BY_CUSTNO WHERE CUSTNO = 100001;
+	
+	
+	
+	
