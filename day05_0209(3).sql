@@ -20,7 +20,7 @@ SELECT PCODE ,CUSTOM_ID FROM tbl_buy#;	-- insufficient PRIVILEGES
 -- view 를 이용한 select 조회
 SELECT * FROM V_BUY vb WHERE pcode ='dk_143';
 
--- buy#, custom# 을 조인하여 custom_id,pcode,고객이름,이메일,구매수량,구매날짜
+-- buy#, custom# 을 조인하여 고객이름,이메일,구매수량,구매날짜
 -- ㄴ v_sale 이름의 view 를 만드세요.
 
 CREATE VIEW V_sale
