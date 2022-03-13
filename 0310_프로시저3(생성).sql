@@ -27,7 +27,7 @@ BEGIN
 	-- 구해진 부서ID로 직원테이블에서 최고 연봉금액 구하기
 	SELECT max(salary) 
 	INTO  max_sal	-- 변수에 저장하기
-	FROM EMPLOYEES e WHERE DEPARTMENT_ID =dept_id;		--변수를 조건식에 활용
+	FROM EMPLOYEES e WHERE DEPARTMENT_ID =dept_id; 		--변수를 조건식에 활용
 	DBMS_OUTPUT.PUT_LINE(dept_name || ' 최고 연봉금액 : ' || max_sal);
 	-- 추가: 'Sales'부서의 최고연봉금액을 받는 직원의 정보구하기 (행 전체를 변수에 저장)
 	SELECT * 

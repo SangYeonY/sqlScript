@@ -34,7 +34,7 @@ BEGIN
 	FROM EMPLOYEES e WHERE DEPARTMENT_ID = dept_id;			-- 변수를 조건식에 활용
 	DBMS_OUTPUT.PUT_LINE('최고 연봉금액(Sales 부서) : ' || max_sal);
 	-- 추가 : 최고연봉금액을 받는 직원의 정보구하기 (행 전체를 변수에 저장)
-	SELECT * 
+	SELECT * FROM EMPLOYEES e 
 	INTO emp				-- rowtype 변수에 조회결과 모든 컬럼 저장.
 	FROM EMPLOYEES e 
 	WHERE DEPARTMENT_ID = dept_id AND e.SALARY = max_sal; 
